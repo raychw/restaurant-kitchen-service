@@ -22,8 +22,8 @@ urlpatterns = [
     path(
         "",
         include(
-            "service.urls",
-                namespace="service"
+            "catalog.urls",
+                namespace="catalog"
         )
     ),
 ]
