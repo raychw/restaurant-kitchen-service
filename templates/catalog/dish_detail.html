@@ -3,5 +3,18 @@
 {% block content %}
   <h1>Name: {{ dish.name }}</h1>
 
-  <p><strong>Cook:</strong> <a href="">{{ dish.cook }}</a></p>
+  {% if dish.cooks.all %}
+    <p><strong>Cooks:</strong></p>
+    <ul>
+      {% for cook in dish.cooks.all %}
+        <li>
+          <a href="{% url 'catalog:cook_detail' pk=cook.id %}">
+            {{ cook.username }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No cooks assigned.</p>
+  {% endif %}
 {% endblock %}

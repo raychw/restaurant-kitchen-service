@@ -6,8 +6,16 @@
     <ul>
       {% for dish in dish_list %}
       <li>
-        <a>{{ dish.name }}</a>
-        ({{dish.cook}})
+        <a href="{% url "catalog:dish_detail" dish.id %}">{{ dish.name }}</a>
+        <ul>
+          {% if dish.cooks.all %}
+            {% for cook in dish.cooks.all %}
+            <li>{{ cook.username }}: {{ cook.first_name }} {{ cook.last_name }}</li>
+            {% endfor %}
+          {% else %}
+            <li>No cooks assigned</li>
+          {% endif %}
+        </ul>
       </li>
       {% endfor %}
     </ul>

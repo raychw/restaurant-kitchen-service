@@ -6,11 +6,20 @@
     <ul>
       {% for cook in cook_list %}
       <li>
-        {{ cook.username }}: {{ cook.first_name }} {{ cook.last_name }} - {{ cook.dishes }}
+        {{ cook.username }}: {{ cook.first_name }} {{ cook.last_name }} - 
+        {% if cook.dishes.all %}
+          <ul>
+            {% for dish in cook.dishes.all %}
+            <li>{{ dish.name }}</li>
+            {% endfor %}
+          </ul>
+        {% else %}
+          No dishes assigned
+        {% endif %}
       </li>
       {% endfor %}
     </ul>
   {% else %}
-    <p>There are no dishes in our service.</p>
+    <p>There are no cooks in our service.</p>
   {% endif %}
 {% endblock %}
