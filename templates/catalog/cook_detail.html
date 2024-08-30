@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Cook: {{ cook.first_name }} {{ cook.last_name }} ({{ cook.username }})</h1>
+
+  {% if cook.dishes.all %}
+    <p><strong>Dishes:</strong></p>
+    <ul>
+      {% for dish in cook.dishes.all %}
+        <li>
+          <a href="{% url "catalog:dish_detail" pk=dish.id %}">
+            {{ dish.name }}
+          </a>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No dishes assigned.</p>
+  {% endif %}
+{% endblock %}

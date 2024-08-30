@@ -8,7 +8,7 @@
     <ul>
       {% for cook in dish.cooks.all %}
         <li>
-          <a href="{% url 'catalog:cook_detail' pk=cook.id %}">
+          <a href="{% url "catalog:cook_detail" pk=cook.id %}">
             {{ cook.username }}
           </a>
         </li>
