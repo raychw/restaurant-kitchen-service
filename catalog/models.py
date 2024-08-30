@@ -12,6 +12,20 @@ class DishType(models.Model):
 
 class Cook(AbstractUser):
     years_of_experience = models.IntegerField(default=0)
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='cook_set',
+        blank=True,
+        help_text="The groups this user belongs to.",
+        verbose_name="groups"
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='cook_set',
+        blank=True,
+        help_text="Specific permissions for this user.",
+        verbose_name="user permissions"
+    )
 
     class Meta:
         verbose_name = "cook"
@@ -29,4 +43,7 @@ class Dish(models.Model):
     description = models.TextField()
     price = models.DecimalField(max_digits=5, decimal_places=2)
     dish_type = models.ForeignKey(DishType, on_delete=models.CASCADE)
-    cooks = models.ManyToManyField(Cook, on_delete=models.CASCADE)
+    cooks = models.ManyToManyField(Cook, related_name="cooks")
+
+    def __str__(self):
+        return self.name
