@@ -6,7 +6,7 @@
     <ul>
       {% for dish in dish_list %}
       <li>
-        <a href="{{ dish.get_absolute_url }}">{{ dish.name }}</a>
+        <a>{{ dish.name }}</a>
         ({{dish.cook}})
       </li>
       {% endfor %}
