@@ -1,6 +1,8 @@
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views import generic
 
+from catalog.forms import DishForm
 from catalog.models import Dish, Cook, DishType
 
 
@@ -33,6 +35,12 @@ class DishListView(generic.ListView):
 
 class DishDetailView(generic.DetailView):
     model = Dish
+
+
+class DishCreateView(generic.edit.CreateView):
+    model = Dish
+    form_class = DishForm
+    success_url = reverse_lazy("catalog:dish_list")
 
 
 class CookListView(generic.ListView):
