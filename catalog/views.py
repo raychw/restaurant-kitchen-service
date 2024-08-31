@@ -69,6 +69,21 @@ class CookCreateView(generic.CreateView):
     form_class = CookCreationForm
 
 
+class CookUpdateView(generic.UpdateView):
+    model = Cook
+    fields = (
+        "first_name",
+        "last_name",
+        "email"
+    )
+    success_url = reverse_lazy("catalog:cook_list")
+
+
+class CookDeleteView(generic.DeleteView):
+    model = Cook
+    success_url = reverse_lazy("")
+
+
 class DishTypeListView(generic.ListView):
     model = DishType
     context_object_name = "dish_type_list"
