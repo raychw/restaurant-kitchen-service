@@ -35,3 +35,39 @@ def validate_years_of_experience(years_of_experience):
         raise ValidationError("You can't have less than one year of experience to be a cook at our service!")
 
     return years_of_experience
+
+
+class CookUsernameSearchForm(forms.Form):
+    username = forms.CharField(
+        required=False,
+        label="",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Search by username"
+            }
+        )
+    )
+
+
+class DishNameSearchForm(forms.Form):
+    name = forms.CharField(
+        required=False,
+        label="",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Search by name"
+            }
+        )
+    )
+
+
+class DishTypeNameSearchForm(forms.Form):
+    name = forms.CharField(
+        required=False,
+        label="",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Search by name"
+            }
+        )
+    )
