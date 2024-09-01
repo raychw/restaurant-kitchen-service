@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth import get_user_model
 from django.contrib.auth.forms import UserCreationForm
+from django.core.exceptions import ValidationError
 
 from catalog.models import Dish, Cook
 
@@ -24,3 +25,13 @@ class CookCreationForm(UserCreationForm):
             "first_name",
             "last_name",
         )
+
+    def clean_years_of_experience(self):
+        return validate_years_of_experience(self.cleaned_data["years_of_experience"])
+
+
+def validate_years_of_experience(years_of_experience):
+    if years_of_experience < 1:
+        raise ValidationError("You can't have less than one year of experience to be a cook at our service!")
+
+    return years_of_experience
