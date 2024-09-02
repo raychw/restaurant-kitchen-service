@@ -6,7 +6,7 @@ from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from catalog.forms import DishForm, CookCreationForm, DishNameSearchForm, CookUsernameSearchForm, DishTypeNameSearchForm
-from catalog.models import Dish, Cook, DishType
+from catalog.models import Dish, Cook, DishType, Ingredient
 
 
 @login_required
@@ -175,6 +175,55 @@ class DishTypeDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = DishType
     template_name = "catalog/dish_type_confirm_delete.html"
     success_url = reverse_lazy("catalog:dish_type_list")
+
+
+class IngredientListView(LoginRequiredMixin, generic.ListView):
+    model = Ingredient
+    context_object_name = "ingredient_list"
+    template_name = "catalog/ingredient_list.html"
+
+    paginate_by = 5
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super(Ingredient, self).get_context_data(**kwargs)
+        name = self.request.GET.get("name", "")
+
+        context["search_form"] = IngredientNameSearchForm(
+            initial={"name": name}
+        )
+        return context
+
+    def get_queryset(self):
+        form = IngredientNameSearchForm(self.request.GET)
+        queryset = Ingredient.objects.all()
+
+        if form.is_valid():
+            return queryset.filter(
+                name__icontains=form.cleaned_data["name"]
+            )
+        return queryset
+
+
+class IngredientCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Ingredient
+    fields = "__all__"
+    template_name = "catalog/ingredient_form.html"
+    success_url = reverse_lazy("catalog:ingredient_list")
+
+
+class IngredientUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Ingredient
+    fields = "__all__"
+    template_name = "catalog/ingredient_form.html"
+    success_url = reverse_lazy("catalog:ingredient_list")
+
+
+class IngredientDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Ingredient
+    template_name = "catalog/ingredient_confirm_delete.html"
+    success_url = reverse_lazy("catalog:ingredient_list")
+
+
 
 
 @login_required
