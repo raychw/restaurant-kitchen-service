@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% load crispy_forms_filters %}
+
+{% block content %}
+  <form action="" method="get" class="form-inline">
+  {{ search_form|crispy }}
+  <input class="btn btn-secondary" type="submit" value="🔍">
+  </form>
+  <br>
+  <h1>
+    Ingredients List
+    <a href="{% url 'catalog:ingredient_create' %}" class="btn btn-primary link-to-page">
+      Create
+    </a>
+  </h1>
+
+  {% if ingredient_list %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+
+      {% for ingredient in ingredient_list %}
+        <tr>
+          <td>
+              {{ ingredient.id }}
+          </td>
+          <td>
+              {{ ingredient.name }}
+          </td>
+          <td>
+              <a href="{% url 'catalog:ingredient_update' pk=ingredient.id %}">
+                Update
+              </a>
+            </td>
+            <td>
+              <a style="color: red"
+                href="{% url 'catalog:ingredient_delete' pk=ingredient.id %}">
+                Delete
+              </a>
+            </td>
+        </tr>
+      {% endfor %}
+    </table>
+
+  {% else %}
+      <p>There are no ingredients in the service.</p>
+  {% endif %}
+{% endblock %}
