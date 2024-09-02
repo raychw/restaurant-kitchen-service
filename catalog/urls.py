@@ -17,7 +17,7 @@ from .views import (
     CookDeleteView,
     DishTypeUpdateView,
     DishTypeDeleteView,
-    toggle_assign_to_dish
+    toggle_assign_to_dish, IngredientListView, IngredientCreateView, IngredientUpdateView, IngredientDeleteView
 )
 
 urlpatterns = [
@@ -37,6 +37,10 @@ urlpatterns = [
     path("dish_types/<int:pk>/update", DishTypeUpdateView.as_view(), name="dish_type_update"),
     path("dish_types/<int:pk>/delete", DishTypeDeleteView.as_view(), name="dish_type_delete"),
     path("dishes/<int:pk>/toggle_assign/", toggle_assign_to_dish, name="toggle_dish_assign"),
+    path("ingredients/", IngredientListView.as_view(), name="ingredient_list"),
+    path("ingredients/create", IngredientCreateView.as_view(), name="ingredient_create"),
+    path("ingredients/<int:pk>/update", IngredientUpdateView.as_view(), name="ingredient_update"),
+    path("ingredients/<int:pk>/delete", IngredientDeleteView.as_view(), name="ingredient_delete"),
 ]
 
 app_name = "catalog"
