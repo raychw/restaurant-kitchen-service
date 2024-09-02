@@ -71,3 +71,15 @@ class DishTypeNameSearchForm(forms.Form):
             }
         )
     )
+
+
+class IngredientNameSearchForm(forms.Form):
+    name = forms.CharField(
+        required=False,
+        label="",
+        widget=forms.TextInput(
+            attrs={
+                "placeholder": "Search by name"
+            }
+        )
+    )

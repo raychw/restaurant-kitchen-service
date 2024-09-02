@@ -5,7 +5,8 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from catalog.forms import DishForm, CookCreationForm, DishNameSearchForm, CookUsernameSearchForm, DishTypeNameSearchForm
+from catalog.forms import DishForm, CookCreationForm, DishNameSearchForm, CookUsernameSearchForm, \
+    DishTypeNameSearchForm, IngredientNameSearchForm
 from catalog.models import Dish, Cook, DishType, Ingredient
 
 
