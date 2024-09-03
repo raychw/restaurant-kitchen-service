@@ -1,38 +1,3 @@
-{#{% extends "base.html" %}#}
-{#{% load crispy_forms_filters %}#}
-{##}
-{#{% block content %}#}
-{#  <form action="" method="get" class="form-inline">#}
-{#  {{ search_form|crispy }}#}
-{#  <input class="btn btn-secondary" type="submit" value="🔍">#}
-{#  </form>#}
-{#  <br>#}
-{#  <h1>#}
-{#    Dish list#}
-{#    <a href="{% url 'catalog:dish_create' %}" class="btn btn-primary link-to-page">#}
-{#      Create#}
-{#    </a>#}
-{#  </h1>#}
-{#  {% if dish_list %}#}
-{#    <table class="table">#}
-{#      <tr>#}
-{#        <th>ID</th>#}
-{#        <th>Name</th>#}
-{#        <th>Dish type</th>#}
-{#      </tr>#}
-{#    {% for dish in dish_list %}#}
-{#      <tr>#}
-{#        <td><a href="{% url 'catalog:dish_detail' pk=dish.id %}">{{ dish.id }}</a></td>#}
-{#        <td>{{ dish.name }}</td>#}
-{#        <td>{{ dish.dish_type }}</td>#}
-{#      </tr>#}
-{#    {% endfor %}#}
-{#    </table>#}
-{#  {% else %}#}
-{#    <p>There are no dishes in our service.</p>#}
-{#  {% endif %}#}
-{#{% endblock %}#}
-
 {% extends "layouts/base.html" %}
 
 {% block title %} Dishes {% endblock %}
