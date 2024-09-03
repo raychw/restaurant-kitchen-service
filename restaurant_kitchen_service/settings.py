@@ -27,6 +27,9 @@ SECRET_KEY = 'django-insecure-2=dm0%o*fiqv$5d9ax5%oa0hjq%ia#p6b-#5x#)bb7kjwr+!+!
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
+ASSETS_ROOT = os.getenv('ASSETS_ROOT', '/static/assets')
+
 ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = 'catalog.Cook'
@@ -68,6 +71,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'catalog.context_processors.cfg_assets_root'
             ],
         },
     },
