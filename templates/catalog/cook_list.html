@@ -1,49 +1,8 @@
-{#{% extends "base.html" %}#}
-{#{% load crispy_forms_filters %}#}
-{##}
-{#{% block content %}#}
-{#  <form action="" method="get" class="form-inline">#}
-{#  {{ search_form|crispy }}#}
-{#  <input class="btn btn-secondary" type="submit" value="🔍">#}
-{#  </form>#}
-{#  <br>#}
-{#    <h1>#}
-{#      Cook List#}
-{#      <a href="{% url 'catalog:cook_create' %}" class="btn btn-primary link-to-page">#}
-{#        Create#}
-{#      </a>#}
-{#    </h1>#}
-{##}
-{#    {% if cook_list %}#}
-{#    <table class="table">#}
-{#      <tr>#}
-{#        <th>ID</th>#}
-{#        <th>Username</th>#}
-{#        <th>First name</th>#}
-{#        <th>Last name</th>#}
-{#        <th>Years of experience</th>#}
-{#      </tr>#}
-{#    {% for cook in cook_list %}#}
-{#      <tr>#}
-{#        <td>{{ cook.id }}</td>#}
-{#        <td><a href="{% url 'catalog:cook_detail' pk=cook.id %}">{{ cook.username }} {% if user == cook %} (Me){% endif %}</a></td>#}
-{#        <td>{{ cook.first_name }}</td>#}
-{#        <td>{{ cook.last_name }}</td>#}
-{#        <td>{{ cook.years_of_experience }}</td>#}
-{#      </tr>#}
-{#    {% endfor %}#}
-{##}
-{#    </table>#}
-{#    {% else %}#}
-{#      <p>There are no cooks in the service.</p>#}
-{#    {% endif %}#}
-{#{% endblock %}#}
-
 {% extends "layouts/base.html" %}
 
-{% block title %} About Us {% endblock %} 
+{% block title %} Cooks {% endblock %}
 
-{% block body_class %} about-us {% endblock %}
+{% block body_class %} cooks {% endblock %}
 
 <!-- Specific Page CSS goes HERE  -->
 {% block stylesheets %}
@@ -61,16 +20,16 @@
         font-weight: 400; /* Make the font weight normal */
         color: #6c757d; /* A bit lighter for less emphasis */
     }
-    
+
     .table {
         border-collapse: separate;
         border-spacing: 0 8px; /* Adds spacing between rows */
     }
-    
+
     .table tbody tr {
         background-color: #f8f9fa; /* Light grey background for table rows */
     }
-    
+
     .table tbody tr:hover {
         background-color: #e9ecef; /* Slightly darker on hover */
     }
@@ -89,7 +48,6 @@
           <div class="col-lg-8 text-center mx-auto my-auto">
             <h1 class="text-white">Extend our community!</h1>
             <p class="lead mb-4 text-white opacity-8">We welcome every chef to this website!</p>
-            <a href="{% url 'catalog:cook_create' %}" class="btn bg-white text-dark">Create Cook</a>
           </div>
         </div>
       </div>
