@@ -12,7 +12,7 @@
         font-weight: 700;
         color: #343a40;
     }
-        
+    
     /* Style the buttons */
     .btn-rounded {
         border-radius: 20px;
@@ -50,6 +50,8 @@
         background-color: #ffffff;
         border-radius: 8px;
         overflow: hidden;
+        border-collapse: separate;
+        border-spacing: 0 8px; /* Adds spacing between rows */
     }
     
     .table thead {
@@ -59,7 +61,7 @@
     }
     
     .table tbody tr:hover {
-        background-color: #f1f3f5;
+        background-color: #e9ecef; /* Slightly darker on hover */
     }
     
     .table th,
@@ -72,19 +74,75 @@
     .alert {
         font-size: 1.1rem;
     }
-    
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .table th,
-        .table td {
-            padding: 10px;
-        }
-    
-        .btn-rounded {
-            font-size: 0.9rem;
-        }
+
+    /* Pagination Styling */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      padding: 0;
+      margin: 20px 0;
+      list-style: none;
     }
 
+    .pagination li {
+      margin: 0 5px;
+    }
+
+    .pagination a,
+    .pagination span {
+      display: block;
+      padding: 10px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      color: #007bff;
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+    }
+
+    .pagination a:hover {
+      background-color: #e9ecef;
+    }
+
+    .pagination .active span {
+      background-color: #ff416c; /* Pink background for current page */
+      color: #fff;
+      border: 1px solid #ff416c;
+    }
+
+    .pagination .disabled span {
+      color: #6c757d;
+      border-color: #dee2e6;
+      background-color: #e9ecef;
+    }
+
+    .pagination .disabled a {
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .table th,
+      .table td {
+        padding: 10px;
+      }
+
+      .btn-rounded {
+        font-size: 0.9rem;
+      }
+    }
+    
+    .table tbody tr {
+  background-color: #ffffff;
+}
+    
+    .table tbody tr:hover {
+      background-color: #e9ecef;
+    }
+    
+    .table tbody tr:nth-of-type(odd) {
+      background-color: #f8f9fa; /* Alternating row colors */
+    }
   </style>
 {% endblock stylesheets %}
 
@@ -151,11 +209,38 @@
               There are no cooks available yet.
             </div>
             {% endif %}
+          
+            <div class="pagination">
+              {% if page_obj.has_previous %}
+                <li><a href="?page=1" class="btn btn-outline-primary">&laquo; First</a></li>
+                <li><a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary">&lsaquo; Previous</a></li>
+              {% else %}
+                <li class="disabled"><span class="btn btn-outline-primary">&laquo; First</span></li>
+                <li class="disabled"><span class="btn btn-outline-primary">&lsaquo; Previous</span></li>
+              {% endif %}
+
+              {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                  <li class="active"><span class="btn btn-primary">{{ num }}</span></li>
+                {% else %}
+                  <li><a href="?page={{ num }}" class="btn btn-outline-primary">{{ num }}</a></li>
+                {% endif %}
+              {% endfor %}
+
+              {% if page_obj.has_next %}
+                <li><a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary">Next &rsaquo;</a></li>
+                <li><a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary">Last &raquo;</a></li>
+              {% else %}
+                <li class="disabled"><span class="btn btn-outline-primary">Next &rsaquo;</span></li>
+                <li class="disabled"><span class="btn btn-outline-primary">Last &raquo;</span></li>
+              {% endif %}
+            </div>
           </div>
         </div>
       </div>
     </section>
   </div>
+  
 
 {% endblock content %}
 
