@@ -27,16 +27,16 @@
                       <h6 class="dropdown-header text-dark font-weight-bolder d-flex align-items-center px-1">
                         Main Pages
                       </h6>
-                      <a href="/" class="dropdown-item border-radius-md">
+                      <a href="{% url "catalog:dish_type_list" %}" class="dropdown-item border-radius-md">
                         <span>Dish Types</span>
                       </a>
                       <a href="{% url "catalog:cook_list" %}" class="dropdown-item border-radius-md">
                         <span>Cooks</span>
                       </a>
-                      <a href="/" class="dropdown-item border-radius-md">
+                      <a href="{% url "catalog:dish_list" %}" class="dropdown-item border-radius-md">
                         <span>Dishes</span>
                       </a>
-                      <a href="/" class="dropdown-item border-radius-md">
+                      <a href="{% url "catalog:ingredient_list" %}" class="dropdown-item border-radius-md">
                         <span>Ingredients</span>
                       </a>
                     </div>
