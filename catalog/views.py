@@ -5,19 +5,30 @@ from django.urls import reverse_lazy
 from django.views import generic
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from catalog.forms import DishForm, CookCreationForm, DishNameSearchForm, CookUsernameSearchForm, \
-    DishTypeNameSearchForm, IngredientNameSearchForm
-from catalog.models import Dish, Cook, DishType, Ingredient
+from catalog.forms import (
+    DishForm,
+    CookCreationForm,
+    DishNameSearchForm,
+    CookUsernameSearchForm,
+    DishTypeNameSearchForm,
+    IngredientNameSearchForm
+)
+from catalog.models import (
+    Dish,
+    Cook,
+    DishType,
+    Ingredient
+)
 
 
 @login_required
 def index(request):
     """View function for the home page of the site."""
 
-    num_dish_types = DishType.objects.all().count()
-    num_dishes = Dish.objects.all().count()
-    num_cooks = Cook.objects.all().count()
-    num_ingredients = Ingredient.objects.all().count()
+    num_dish_types = DishType.objects.count()
+    num_dishes = Dish.objects.count()
+    num_cooks = Cook.objects.count()
+    num_ingredients = Ingredient.objects.count()
 
     context = {
         "num_dish_types": num_dish_types,

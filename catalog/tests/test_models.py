@@ -1,6 +1,10 @@
 from django.test import TestCase
 from django.urls import reverse
-from catalog.models import DishType, Ingredient, Dish
+from catalog.models import (
+    DishType,
+    Ingredient,
+    Dish
+)
 from django.contrib.auth import get_user_model
 
 
