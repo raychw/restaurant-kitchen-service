@@ -222,8 +222,6 @@ class IngredientDeleteView(LoginRequiredMixin, generic.DeleteView):
     success_url = reverse_lazy("catalog:ingredient_list")
 
 
-
-
 @login_required
 def toggle_assign_to_dish(request, pk):
     cook = Cook.objects.get(id=request.user.id)
