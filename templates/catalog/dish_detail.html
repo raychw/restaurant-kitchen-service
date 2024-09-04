@@ -104,7 +104,7 @@
 
                 <div class="list-section cooks-section">
                   <h4 class="section-header">Cooks</h4>
-                  {% if cook in user.cooks.all %}
+                  {% if request.user in dish.cooks.all %}
                     <a href="{% url 'catalog:toggle_dish_assign' pk=dish.id %}" class="btn btn-danger link-to-page">Remove Me From This Dish</a>
                   {% else %}
                     <a href="{% url 'catalog:toggle_dish_assign' pk=dish.id %}" class="btn btn-success link-to-page">Assign Me to This Dish</a>
