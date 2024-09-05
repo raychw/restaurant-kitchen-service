@@ -24,6 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 from dotenv import load_dotenv
 import os
+import dj_database_url
 
 SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure-2=dm0%o*fiqv$5d9ax5%oa0hjq%ia#p6b-#5x#)bb7kjwr+!+!')
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -93,6 +94,9 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+db_from_env = dj_database_url.config(conn_max_age=500)
+DATABASES["default"].update(db_from_env)
 
 
 # Password validation
