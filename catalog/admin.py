@@ -31,4 +31,6 @@ class DishAdmin(admin.ModelAdmin):
     list_filter = ("dish_type",)
 
 
-admin.site.register(DishType)
+@admin.register(DishType)
+class DishTypeAdmin(admin.ModelAdmin):
+    pass
