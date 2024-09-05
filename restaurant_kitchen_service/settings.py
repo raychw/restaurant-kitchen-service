@@ -34,7 +34,11 @@ DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 ASSETS_ROOT = os.getenv('ASSETS_ROOT', '/static/assets')
 
-ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "restaurant-kitchen-service-36qe.onrender.com",
+]
 
 AUTH_USER_MODEL = 'catalog.Cook'
 
