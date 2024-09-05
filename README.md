@@ -10,6 +10,11 @@ cooks and view their profiles. Actually, you can create, update and view anythin
 
 [Link to the rendered website]
 
+You can log in with these credentials:
+
+username: test.cook
+password: cookING.01
+
 ## Installing
 
 If you want to launch my project on your device, here are the steps. However, mind that Python3 should already be
