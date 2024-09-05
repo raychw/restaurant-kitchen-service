@@ -3,7 +3,8 @@ from django.contrib.auth.admin import UserAdmin
 
 from catalog.models import (
     Cook,
-    Dish, DishType
+    Dish,
+    DishType
 
 )
 
