@@ -5,7 +5,6 @@ from catalog.models import (
     Cook,
     Dish,
     DishType
-
 )
 
 
