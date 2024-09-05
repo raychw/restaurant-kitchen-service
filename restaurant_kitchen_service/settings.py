@@ -25,17 +25,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
-
-# Retrieve SECRET_KEY from environment
-SECRET_KEY = os.getenv("SECRET_KEY")
+SECRET_KEY = os.environ.get('SECRET_KEY', default='django-insecure-2=dm0%o*fiqv$5d9ax5%oa0hjq%ia#p6b-#5x#)bb7kjwr+!+!')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 
 ASSETS_ROOT = os.getenv('ASSETS_ROOT', '/static/assets')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1"]
 
 AUTH_USER_MODEL = 'catalog.Cook'
 
