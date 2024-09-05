@@ -1,6 +1,5 @@
 from django.urls import path
 
-from . import views
 from catalog.views import (
     index,
     DishListView,
@@ -17,7 +16,11 @@ from catalog.views import (
     CookDeleteView,
     DishTypeUpdateView,
     DishTypeDeleteView,
-    toggle_assign_to_dish, IngredientListView, IngredientCreateView, IngredientUpdateView, IngredientDeleteView
+    toggle_assign_to_dish,
+    IngredientListView,
+    IngredientCreateView,
+    IngredientUpdateView,
+    IngredientDeleteView
 )
 
 urlpatterns = [
