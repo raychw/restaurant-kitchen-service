@@ -1,0 +1,95 @@
+{% extends "layouts/base.html" %}
+{% load crispy_forms_filters %}
+
+{% block title %}{{ object|yesno:"Update,Create" }} Ingredient {% endblock %}
+
+{% block body_class %}form-page{% endblock %}
+
+{% block stylesheets %}
+<style>
+  .page-header {
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    height: 60vh;
+  }
+  .mask {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .card-body {
+    margin-top: -50px;
+  }
+  .avatar-xxl {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+  }
+  .form-container {
+    margin-top: 30px;
+    padding: 30px;
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  .form-header {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  .form-control {
+    background-color: #ffffff;
+    border: 1px solid #ced4da;
+    color: #495057;
+    padding: 10px 12px; /* Added padding for better spacing */
+  }
+  .btn-primary {
+    background-color: #ff4081;
+    border-color: #ff4081;
+  }
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+
+  {% include 'includes/navigation-transparent.html' %}
+
+  <header>
+    <div class="page-header min-height-400" style="background-image: url('{{ ASSETS_ROOT }}/img/vegetables.jpg');" loading="lazy">
+      <span class="mask bg-gradient-dark opacity-8"></span>
+    </div>
+  </header>
+
+  <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6 mb-4">
+    <!-- START Form Section -->
+    <section class="py-sm-7 py-5 position-relative">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 mx-auto">
+            <div class="mt-n8 mt-md-n9 text-center">
+              <img class="avatar avatar-xxl shadow-xl position-relative z-index-2" src="{{ ASSETS_ROOT }}/img/vegetable.jpg" alt="Form Avatar" loading="lazy">
+            </div>
+            <div class="row py-5">
+              <div class="col-lg-7 col-md-7 z-index-2 position-relative px-md-2 px-sm-5 mx-auto">
+                <div class="form-container">
+                  <h3 class="form-header">{{ object|yesno:"Update,Create" }} Ingredient</h3>
+                  <form action="" method="post" novalidate>
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <br>
+                    <input type="submit" value="Submit" class="btn btn-primary">
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- END Form Section -->
+  </div>
+
+{% endblock content %}
+
+{% block javascripts %}
+<!-- Add specific page JavaScript here -->
+{% endblock javascripts %}

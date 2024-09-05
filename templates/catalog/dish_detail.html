@@ -1,0 +1,148 @@
+{% extends "layouts/base.html" %}
+
+{% block title %}Dish Profile{% endblock %}
+
+{% block body_class %}dish-profile{% endblock %}
+
+{% block stylesheets %}
+<!-- Add specific page stylesheets here -->
+<style>
+  .page-header {
+    position: relative;
+    background-position: center;
+    background-size: cover;
+    height: 60vh;
+  }
+  .mask {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .card-body {
+    margin-top: -50px;
+  }
+  .avatar-xxl {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+  }
+  .link-to-page {
+    margin-left: 10px;
+  }
+  .dish-details p {
+    margin-bottom: 10px;
+  }
+  .section-header {
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  .list-section {
+    margin-top: 30px;
+  }
+  .list-section .card {
+    border: none;
+    background-color: #f8f9fa;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    margin-bottom: 15px;
+    padding: 15px;
+  }
+  .list-section .card h5 {
+    margin-bottom: 5px;
+  }
+  .list-section .card p {
+    margin: 0;
+  }
+  .badge {
+    font-size: 14px;
+    font-weight: 500;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+  }
+  .badge-dish {
+    background-color: #007bff;
+    color: white;
+  }
+  .badge-ingredient {
+    background-color: #28a745;
+    color: white;
+  }
+</style>
+{% endblock stylesheets %}
+
+{% block content %}
+
+  {% include 'includes/navigation-transparent.html' %}
+
+  <header>
+    <div class="page-header min-height-400" style="background-image: url('{{ ASSETS_ROOT }}/img/carbonara.jpg');" loading="lazy">
+      <span class="mask bg-gradient-dark opacity-8"></span>
+    </div>
+  </header>
+
+  <div class="card card-body blur shadow-blur mx-3 mx-md-4 mt-n6 mb-4">
+    <!-- START Dish Profile Section -->
+    <section class="py-sm-7 py-5 position-relative">
+      <div class="container">
+        <div class="row">
+          <div class="col-12 mx-auto">
+            <div class="mt-n8 mt-md-n9 text-center">
+              <img class="avatar avatar-xxl shadow-xl position-relative z-index-2" src="{{ ASSETS_ROOT }}/img/dish.jpg" alt="Dish Profile Picture" loading="lazy">
+            </div>
+            <div class="row py-5">
+              <div class="col-lg-7 col-md-7 z-index-2 position-relative px-md-2 px-sm-5 mx-auto">
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                  <h3 class="mb-0">{{ dish.name }}</h3>
+                  <div class="d-block">
+                    <a href="{% url 'catalog:dish_delete' pk=dish.id %}" class="btn btn-danger link-to-page">Delete</a>
+                    <a href="{% url 'catalog:dish_update' pk=dish.id %}" class="btn btn-secondary link-to-page">Update</a>
+                  </div>
+                </div>
+                <div class="row mb-4 dish-details">
+                  <div class="col-auto">
+                    <p><strong>Dish Type:</strong> {{ dish.dish_type }}</p>
+                  </div>
+                </div>
+
+                <div class="list-section cooks-section">
+                  <h4 class="section-header">Cooks</h4>
+                  {% if request.user in dish.cooks.all %}
+                    <a href="{% url 'catalog:toggle_dish_assign' pk=dish.id %}" class="btn btn-danger link-to-page">Remove Me From This Dish</a>
+                  {% else %}
+                    <a href="{% url 'catalog:toggle_dish_assign' pk=dish.id %}" class="btn btn-success link-to-page">Assign Me to This Dish</a>
+                  {% endif %}
+                  <hr>
+                  <div>
+                    {% for cook in dish.cooks.all %}
+                      <div class="card">
+                        <h5>{{ cook.username }}</h5>
+                        <p class="text-muted">{{ cook.first_name }} {{ cook.last_name }}</p>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+
+                <div class="list-section ingredients-section">
+                  <h4 class="section-header">Ingredients</h4>
+                  <hr>
+                  <div>
+                    {% for ingredient in dish.ingredients.all %}
+                      <div class="card">
+                        <h5>{{ ingredient.name }}</h5>
+                      </div>
+                    {% endfor %}
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- END Dish Profile Section -->
+  </div>
+
+{% endblock content %}
+
+{% block javascripts %}
+<!-- Add specific page JavaScript here -->
+{% endblock javascripts %}

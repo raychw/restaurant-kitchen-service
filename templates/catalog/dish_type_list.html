@@ -1,0 +1,256 @@
+{% extends "layouts/base.html" %}
+
+{% block title %} Dish Types {% endblock %}
+
+{% block body_class %} dish_types {% endblock %}
+
+{% block stylesheets %}
+  <style>
+    /* Style the heading */
+    h1.text-center {
+        font-weight: 700;
+        color: #343a40;
+    }
+    
+    /* Style the buttons */
+    .btn-rounded {
+        border-radius: 20px;
+        background-color: #ff416c;
+        color: #fff;
+    }
+    
+    .btn-rounded:hover {
+        background-color: #ff4b2b;
+        color: #fff;
+    }
+    
+    .btn-outline-primary {
+        border: 1px solid #007bff;
+        color: #007bff;
+    }
+    
+    .btn-outline-primary:hover {
+        background-color: #007bff;
+        color: #fff;
+    }
+    
+    .btn-outline-danger {
+        border: 1px solid #dc3545;
+        color: #dc3545;
+    }
+    
+    .btn-outline-danger:hover {
+        background-color: #dc3545;
+        color: #fff;
+    }
+    
+    /* Table Styling */
+    .table {
+        background-color: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+        border-collapse: separate;
+        border-spacing: 0 8px; /* Adds spacing between rows */
+    }
+    
+    .table thead {
+        background-color: #f8f9fa;
+        font-weight: 600;
+        color: #495057;
+    }
+    
+    .table tbody tr:hover {
+        background-color: #e9ecef; /* Slightly darker on hover */
+    }
+    
+    .table th,
+    .table td {
+        padding: 15px;
+        vertical-align: middle;
+        text-align: center;
+    }
+    
+    .alert {
+        font-size: 1.1rem;
+    }
+
+    /* Pagination Styling */
+    .pagination {
+      display: flex;
+      justify-content: center;
+      padding: 0;
+      margin: 20px 0;
+      list-style: none;
+    }
+
+    .pagination li {
+      margin: 0 5px;
+    }
+
+    .pagination a,
+    .pagination span {
+      display: block;
+      padding: 10px 15px;
+      border-radius: 5px;
+      text-decoration: none;
+      color: #007bff;
+      background-color: #f8f9fa;
+      border: 1px solid #dee2e6;
+    }
+
+    .pagination a:hover {
+      background-color: #e9ecef;
+    }
+
+    .pagination .active span {
+      background-color: #ff416c; /* Pink background for current page */
+      color: #fff;
+      border: 1px solid #ff416c;
+    }
+
+    .pagination .disabled span {
+      color: #6c757d;
+      border-color: #dee2e6;
+      background-color: #e9ecef;
+    }
+
+    .pagination .disabled a {
+      pointer-events: none;
+      cursor: default;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .table th,
+      .table td {
+        padding: 10px;
+      }
+
+      .btn-rounded {
+        font-size: 0.9rem;
+      }
+    }
+    
+    .table tbody tr {
+  background-color: #ffffff;
+}
+    
+    .table tbody tr:hover {
+      background-color: #e9ecef;
+    }
+    
+    .table tbody tr:nth-of-type(odd) {
+      background-color: #f8f9fa; /* Alternating row colors */
+    }
+  </style>
+{% endblock stylesheets %}
+
+{% block content %}
+
+  {% include 'includes/navigation-transparent.html' %}
+
+  <header class="bg-gradient-dark">
+    <div class="page-header min-vh-75" style="background-image: url('{{ ASSETS_ROOT }}/img/breakfast.jpg');">
+      <span class="mask bg-gradient-dark opacity-6"></span>
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center mx-auto my-auto">
+            <h1 class="text-white">Expand our dish types library!</h1>
+            <p class="lead mb-4 text-white opacity-8">We love the variety!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="card card-body shadow-xl mx-3 mx-md-4 mt-n6">
+    <section class="py-7">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8">
+            <h1 class="mb-4 text-center">Dish Types</h1>
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              {% load crispy_forms_filters %}
+              <form action="" method="get" class="form-inline d-flex">
+                {{ search_form|crispy }}
+                <button class="btn btn-secondary ml-2" type="submit">🔍</button>
+              </form>
+              <a href="{% url 'catalog:dish_type_create' %}" class="btn btn-primary btn-rounded">Create A New Dish Type</a>
+            </div>
+
+            {% if page_obj %}
+            <div class="table-responsive">
+              <table class="table table-bordered table-hover">
+                <thead class="thead-light">
+                  <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for dish_type in page_obj %}
+                  <tr>
+                    <td>{{ dish_type.id }}</td>
+                    <td>{{ dish_type.name }}</td>
+                    <td>
+                      <a href="{% url 'catalog:dish_type_update' pk=dish_type.id %}" class="btn btn-sm btn-outline-primary">
+                        Update
+                      </a>
+                    </td>
+                    <td>
+                      <a href="{% url 'catalog:dish_type_delete' pk=dish_type.id %}" class="btn btn-sm btn-outline-danger">
+                        Delete
+                      </a>
+                    </td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+            </div>
+            {% else %}
+            <div class="alert alert-warning text-center" role="alert">
+              There are no dish types available yet.
+            </div>
+            {% endif %}
+
+            <!-- Pagination -->
+            <div class="pagination">
+              {% if page_obj.has_previous %}
+                <li><a href="?page=1" class="btn btn-outline-primary">&laquo; First</a></li>
+                <li><a href="?page={{ page_obj.previous_page_number }}" class="btn btn-outline-primary">&lsaquo; Previous</a></li>
+              {% else %}
+                <li class="disabled"><span class="btn btn-outline-primary">&laquo; First</span></li>
+                <li class="disabled"><span class="btn btn-outline-primary">&lsaquo; Previous</span></li>
+              {% endif %}
+
+              {% for num in page_obj.paginator.page_range %}
+                {% if page_obj.number == num %}
+                  <li class="active"><span class="btn btn-primary">{{ num }}</span></li>
+                {% else %}
+                  <li><a href="?page={{ num }}" class="btn btn-outline-primary">{{ num }}</a></li>
+                {% endif %}
+              {% endfor %}
+
+              {% if page_obj.has_next %}
+                <li><a href="?page={{ page_obj.next_page_number }}" class="btn btn-outline-primary">Next &rsaquo;</a></li>
+                <li><a href="?page={{ page_obj.paginator.num_pages }}" class="btn btn-outline-primary">Last &raquo;</a></li>
+              {% else %}
+                <li class="disabled"><span class="btn btn-outline-primary">Next &rsaquo;</span></li>
+                <li class="disabled"><span class="btn btn-outline-primary">Last &raquo;</span></li>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+{% endblock content %}
+
+{% block javascripts %}
+  <script>
+    // Existing JavaScript code...
+  </script>
+{% endblock javascripts %}
