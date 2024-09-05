@@ -8,7 +8,7 @@ cooks and view their profiles. Actually, you can create, update and view anythin
 
 ## Check it out!
 
-[Link to the rendered website]
+[Restaurant Kitchen Service](https://restaurant-kitchen-service-36qe.onrender.com)
 
 You can log in with these credentials:
 
